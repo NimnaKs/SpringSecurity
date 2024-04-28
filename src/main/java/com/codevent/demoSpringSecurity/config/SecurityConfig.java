@@ -22,7 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
-@Slf4j
 @EnableGlobalMethodSecurity(
         securedEnabled = true,
         jsr250Enabled = true,
@@ -36,7 +35,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        log.info("Configuring HTTP security...");
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req->req.requestMatchers("api/v1/auth/**")
@@ -49,23 +47,18 @@ public class SecurityConfig {
     }
     @Bean
     public PasswordEncoder passwordEncoder(){
-        log.info("Creating PasswordEncoder bean.");
         return new BCryptPasswordEncoder();
     }
     @Bean
     public AuthenticationProvider authenticationProvider(){
-        log.info("Creating AuthenticationProvider bean.");
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        log.info("User Details {}",userService.userDetailsService());
         daoAuthenticationProvider.setUserDetailsService(userService.userDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        log.info("Created AuthenticationProvider bean {}",daoAuthenticationProvider);
         return daoAuthenticationProvider;
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        log.info("Creating AuthenticationManager bean.");
         return authenticationConfiguration.getAuthenticationManager();
     }
 
