@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class UserServiceIMPL implements UserService {
 
     final private UserDao userDao;

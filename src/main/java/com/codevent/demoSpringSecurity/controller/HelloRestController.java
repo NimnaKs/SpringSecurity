@@ -1,5 +1,5 @@
 package com.codevent.demoSpringSecurity.controller;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/hello")
 public class HelloRestController {
 
-    @GetMapping("user")
-    public String helloUser(){
-        return "Hello User";
+    @GetMapping("/user")
+    public ResponseEntity<String> helloUser(){
+        return ResponseEntity.ok("Hello User");
     }
 
-    @GetMapping("admin")
-    public String helloAdmin(){
-        return "Hello Admin";
+    @GetMapping("/admin")
+    public ResponseEntity<String> helloAdmin(){
+        return ResponseEntity.ok("Hello Admin");
     }
 }

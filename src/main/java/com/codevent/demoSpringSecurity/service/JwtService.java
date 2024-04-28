@@ -4,9 +4,9 @@ import com.codevent.demoSpringSecurity.entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface JwtService {
-    String extractUsername(String token);
+    String extractUserName(String token);
 
     boolean isTokenValid(String token, UserDetails userDetails);
 
-    String generateToken(UserDetails saveUser);
+    String generateToken(UserDetails userDetails);
 }

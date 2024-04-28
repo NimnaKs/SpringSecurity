@@ -4,6 +4,7 @@ package com.codevent.demoSpringSecurity.entity;
 import com.codevent.demoSpringSecurity.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.repository.cdi.Eager;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserEntity implements UserDetails {
 
     @Id
@@ -35,11 +37,6 @@ public class UserEntity implements UserDetails {
         Set<GrantedAuthority> autherities = new HashSet<>();
         autherities.add(new SimpleGrantedAuthority("ROLE_"+role.name()));
         return autherities;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 
     @Override

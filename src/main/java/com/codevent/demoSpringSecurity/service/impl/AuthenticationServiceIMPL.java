@@ -40,7 +40,7 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
                 .firstName(signUp.getFirstName())
                 .lastName(signUp.getLastName())
                 .password(passwordEncoder.encode(signUp.getPassword()))
-                .role(Role.valueOf(String.valueOf(signUp.getRole())))
+                .role(signUp.getRole())
                 .build();
         UserEntity saveUser = userDao.save(conversionData.toUserEntity(userDTO));
         String generateToken = jwtService.generateToken(saveUser);
