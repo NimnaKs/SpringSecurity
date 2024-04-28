@@ -57,4 +57,13 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
         var generateToken = jwtService.generateToken(user);
         return JwtAuthResponse.builder().token(generateToken).build();
     }
+
+    @Override
+    public JwtAuthResponse refreshToken(String refreshToken) {
+        var userEntity = userDao
+                .findByEmail(jwtService.extractUserName(refreshToken))
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return JwtAuthResponse.builder().
+                token(jwtService.generateToken(userEntity)).build();
+    }
 }

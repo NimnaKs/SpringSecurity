@@ -7,6 +7,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface AuthenticationService {
     JwtAuthResponse signUp(SignUp signup);
-
     JwtAuthResponse signIn(SignIn signIn);
+    JwtAuthResponse refreshToken(String refreshToken);
 }
